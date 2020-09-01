@@ -2,7 +2,7 @@
 
 List team members here.
 
-Insert Github repository link here.
+Insert Github repository link here. repository link: https://github.com/nelsongo4/GrovePi-EE250/blob/master/ee250/lab02/grovepi_sensors.py
 """
 
 """python3 interpreters in Ubuntu (and other linux distros) will look in a 
@@ -39,7 +39,7 @@ if __name__ == '__main__':
         setRGB(0,255,0)
         time.sleep(0.2)
         if grovepi.ultrasonicRead(ultrasonic_ranger) < grovepi.analogRead(potentiometer):
-            setText_norefresh(str(grovepi.analogRead(potentiometer) + "cm OBJ PRES  \n" + str(grovepi.ultrasonicRead(ultrasonic_ranger))+"cm")
+            setText_norefresh(str(grovepi.analogRead(potentiometer) + "cm OBJ PRES  \n" + " " + str(grovepi.ultrasonicRead(ultrasonic_ranger))+"cm")
         else:
-            setText_norefresh(str(grovepi.analogRead(potentiometer) + "cm         \n" + str(grovepi.ultrasonicRead(ultrasonic_ranger) + "cm")
+            setText_norefresh(str(grovepi.analogRead(potentiometer) + "cm         \n" + " " + str(grovepi.ultrasonicRead(ultrasonic_ranger) + "cm")
         print(grovepi.ultrasonicRead(PORT))
