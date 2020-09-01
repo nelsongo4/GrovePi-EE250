@@ -23,16 +23,26 @@ sys.path.append('../../Software/Python/')
 sys.path.append('../../Software/Python/grove_rgb_lcd')
 
 import grovepi
+from grove_rgb_lcd import *
 
+ultrasonic_ranger = 4
+potentiometer = 0 
+full_angle = 1023
 """This if-statement checks if you are running this python file directly. That 
 is, if you run `python3 grovepi_sensors.py` in terminal, this if-statement will 
 be true"""
+textCommand(0x01)
 if __name__ == '__main__':
     PORT = 4    # D4
 
     while True:
+        setRGB(0,255,0)
         #So we do not poll the sensors too quickly which may introduce noise,
         #sleep for a reasonable time of 200ms between each iteration.
         time.sleep(0.2)
-
+        #setText_norefresh(str(grovepi.analogRead(potentiometer)) + "cm          \n" + str(grovepi.ultrasonicRead(ultrasonic_ranger))+"cm")
+        if grovepi.ultrasonicRead(ultrasonic_ranger) <= grovepi.analogRead(potentiometer):
+            setText_norefresh(str(grovepi.analogRead(potentiometer)) + "cm OBJ PRES\n"+ str(grovepi.ultrasonicRead(ultrasonic_ranger))+ "cm")
+        else:
+            setText_norefresh(str(grovepi.analogRead(potentiometer)) + "cm         \n" + str(grovepi.ultrasonicRead(ultrasonic_ranger))+"cm")
         print(grovepi.ultrasonicRead(PORT))
