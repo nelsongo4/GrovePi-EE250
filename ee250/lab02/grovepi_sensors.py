@@ -21,9 +21,12 @@ import time
 sys.path.append('../../Software/Python/')
 # This append is to support importing the LCD library.
 sys.path.append('../../Software/Python/grove_rgb_lcd')
-
+from grove_rgb_lcd import *
 import grovepi
 
+potentiometer = 0
+ultrasonic_ranger = 4
+textCommand(0x01)
 """This if-statement checks if you are running this python file directly. That 
 is, if you run `python3 grovepi_sensors.py` in terminal, this if-statement will 
 be true"""
@@ -33,6 +36,10 @@ if __name__ == '__main__':
     while True:
         #So we do not poll the sensors too quickly which may introduce noise,
         #sleep for a reasonable time of 200ms between each iteration.
+        setRGB(0,255,0)
         time.sleep(0.2)
-
+        if grovepi.ultrasonicRead(ultrasonic_ranger) < grovepi.analogRead(potentiometer):
+            setText_norefresh(str(grovepi.analogRead(potentiometer) + "cm OBJ PRES\n" + str(grovepi.ultrasonicRead(ultrasonic_ranger))+"cm")
+        else:
+            setText_norefresh(str(grovepi.analogRead(potentiometer) + "cm         \n" + str(grovepi.ultrasonicRead(ultrasonic_ranger) + "cm")
         print(grovepi.ultrasonicRead(PORT))
