@@ -1,4 +1,4 @@
-from flask import Flask
+rom flask import Flask
 from flask import jsonify
 from flask import request
 
@@ -52,12 +52,25 @@ def get_mailbox_callback():
 
 # TODO: Use Flash's route() decorator to add support to your HTTP server for
 # handling GET requests made to the URL '/mailbox/search'
-#
-# Use get_mailbox_callback() as an example. You'll need to use mailboxManager
+@app.route('/mailbox',methods = ['GET'])
+def search_mail_callback():
+    search = request.args.get('search')
+    if search == mailbox_search:
+        new_response = jsonify(mailbox_manager.get_mail())
+    else:
+        if search == None:
+            new_response = jsonify({'Response': 'Missing Search'})
+
+        else:
+            new_response = jsonify({'Response': 'Search does not match'})
+
+    return new_response
+     # Use get_mailbox_callback() as an example. You'll need to use mailboxManager
 # for this request as well, so make sure to spend some time understanding how
 # it works and the features it provides.
 #
 # Your implementation should handle reasonable error cases as well, such as an
+
 # incorrect password.
 
 #def search_mailbox_callback():
@@ -122,3 +135,4 @@ if __name__ == '__main__':
     mailbox_manager = mailboxManager.mailboxManager()
 
     app.run(debug=False, host='0.0.0.0', port=5000)
+
