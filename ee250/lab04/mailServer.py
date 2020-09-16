@@ -52,6 +52,31 @@ def get_mailbox_callback():
 
 # TODO: Use Flash's route() decorator to add support to your HTTP server for
 # handling GET requests made to the URL '/mailbox/search'
+app.route('/mailbox/search',methods = ['GET'])
+def search_mailbox_callback():
+    search_field = request.args.get('field')
+    search_text = request.args.get('text')
+    #print(search_text)
+    #print(mailbox_manager.mailbox[0])
+    second_response = []
+    if mailbox_password:
+        if search_field is not None and search_text is not None:
+            print('retrieving mail with {} in the {} field'.format(search_text, search_field))
+            #new_response = jsonify({'Info':'retrieving mail with {} in the {} field'.format(search_text,search_field)})
+            new_response = jsonify(mailbox_manager.get_mail(search_field,search_text))
+        elif search_text is not None:
+            print('retrieving mail with text {}'.format(search_text))
+            #new_response = jsonify({'Info':'retrieving mail with text {}'.format(search_text)})
+            new_response = jsonify(mailbox_manager.get_mail(search_field,search_text))
+        else:
+            new_response = jsonify({'Response':'No Entry Given'}) 
+    else:
+        if mailbox_password == None:
+            new_response = jsonify({'Response': 'Missing Password'})
+        else:
+            new_response = jsonify({'Response': 'Password does not match'})
+    return new_response
+
 @app.route('/mailbox',methods = ['GET'])
 def search_mail_callback():
     search = request.args.get('search')
