@@ -1,9 +1,6 @@
 """EE 250L Lab 04 Starter Code
 Run vm_subscriber.py in a separate terminal on your VM."""
 
-"""EE 250L Lab 04 Starter Code
-Run vm_subscriber.py in a separate terminal on your VM."""
-
 import paho.mqtt.client as mqtt
 import time
 import sys
@@ -30,8 +27,9 @@ def on_connect(client, userdata, flags, rc):
 def custom_callback(client, userdata, message):
     print("Custom_callback: " + message.topic + " " + "\"" + str(message.payload, "utf-8") + "\"")
     print("custom_callback: message.payload is of type " + str(type(message.payload)))
-    print("VM: " + str(grovepi.ultrasonicRead(ultrasonic_ranger)) + "cm")
-    if grovepi.pinMode(button,"INPUT") == 0:
+    if isinstance(message.payload,int):
+        print("VM: " + str(message.payload,"utf-8") + " cm")
+    if str(message.payload) == "Button pressed!":
         print("Button pressed!")
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
@@ -48,6 +46,8 @@ if __name__ == '__main__':
     while True:
         #print("delete this line")
         time.sleep(1)
+
+
 
 
 
