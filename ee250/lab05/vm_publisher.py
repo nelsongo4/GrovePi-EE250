@@ -8,9 +8,9 @@ from pynput import keyboard
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
     #subscribe to topics of interest here
-    client.subscribe("raspberrypy/custom_callback")
-    client.message_callback_add("raspberrypi/custom_callback",custom_callback)
-    client.subscribe("raspberrypi/led")
+    #client.subscribe("raspberrypy/custom_callback")
+    #client.message_callback_add("raspberrypi/custom_callback",custom_callback)
+    #client.subscribe("raspberrypi/led")
 
 #Default message callback. Please use custom callbacks.
 def custom_callback(client, userdata, message):
