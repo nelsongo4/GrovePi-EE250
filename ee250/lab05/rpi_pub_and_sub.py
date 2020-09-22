@@ -14,6 +14,7 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("raspberrypi/custom_callback",custom_callback)
     client.subscribe("raspberrypi/ultrasonicRanger")
     client.subcribe("raspberrypi/led")
+    client.subscribe("raspberrypi/lcd")
 #Default message callback. Please use custom callbacks.
 def custom_callback(client, userdata, message):
     print("Custom_callback: " + message.topic + " " + "\"" + str(message.payload, "utf-8") + "\"")
@@ -22,6 +23,9 @@ def custom_callback(client, userdata, message):
         digitalWrite(led,1)
     if str(message.payload) == "LED_OFF":
         digitalWrite(led,0)
+    if str(mesage.payload) = "w" or str(mesage.payload) = "a" or str(mesage.payload) = "s" or str(mesage.payload) = "d":
+        setTextnorefresh(str(message.payload))
+
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
 
@@ -40,7 +44,5 @@ if __name__ == '__main__':
         client.publish("raspberrypi/ultrasonicRanger",grovepi.ultrasonicRead(ultrasonic_ranger))
         if grovepi.pinMode(button,"INPUT") == 0:
             client.publish("raspberrypi/button","Button pressed!")
-
-
 
 
