@@ -29,21 +29,21 @@ def on_press(key):
     if k == 'w':
         print("w")
         #send "w" character to rpi
-        client.publish("raspberrypi/lcd",k)
+        client.publish("raspberrypi/lcd","w")
     elif k == 'a':
         print("a")
         # send "a" character to rpi
-        client.publish("raspberrypi/lcd",k)
+        client.publish("raspberrypi/lcd","a")
         #send "LED_ON"
         client.publish("raspberrypi/led","LED_ON")
     elif k == 's':
         print("s")
         # send "s" character to rpi
-        client.publish("raspberrypi/lcd",k)
+        client.publish("raspberrypi/lcd","s")
     elif k == 'd':
         print("d")
         # send "d" character to rpi
-        client.publish("raspberrypi/lcd",k)
+        client.publish("raspberrypi/lcd","d")
         # send "LED_OFF"
         client.publish("raspberrypi/led","LED_OFF")
 if __name__ == '__main__':
@@ -62,4 +62,3 @@ if __name__ == '__main__':
     while True:
         #print("delete this line")
         time.sleep(1)
-
