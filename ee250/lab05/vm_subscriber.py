@@ -27,9 +27,9 @@ def on_connect(client, userdata, flags, rc):
 def custom_callback(client, userdata, message):
     print("Custom_callback: " + message.topic + " " + "\"" + str(message.payload, "utf-8") + "\"")
     print("custom_callback: message.payload is of type " + str(type(message.payload)))
-    if isinstance(message.payload,int):
+    if isinstance(int(str(message.payload,"utf-8")),int):
         print("VM: " + str(message.payload,"utf-8") + " cm")
-    if str(message.payload) == "Button pressed!":
+    if str(message.payload,"utf-8") == "Button pressed!":
         print("Button pressed!")
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
@@ -46,8 +46,6 @@ if __name__ == '__main__':
     while True:
         #print("delete this line")
         time.sleep(1)
-
-
 
 
 
