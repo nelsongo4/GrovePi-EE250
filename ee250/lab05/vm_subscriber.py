@@ -1,6 +1,9 @@
 """EE 250L Lab 04 Starter Code
 Run vm_subscriber.py in a separate terminal on your VM."""
 
+"""EE 250L Lab 04 Starter Code
+Run vm_subscriber.py in a separate terminal on your VM."""
+
 import paho.mqtt.client as mqtt
 import time
 import sys
@@ -11,6 +14,7 @@ import sys
 #sys.path.append('../../Software/Python/grove_rgb_lcd')
 #from grove_rgb_lcd import *
 #import grovepi
+
 button = 3
 ultrasonic_ranger = 4
 def on_connect(client, userdata, flags, rc):
@@ -18,6 +22,7 @@ def on_connect(client, userdata, flags, rc):
     #subscribe to the ultrasonic ranger topic here
     client.subscribe("raspberrypy/custom_callback")
     client.message_callback_add("raspberrypi/custom_callback",custom_callback)
+    client.subscribe("raspberrypi/led")
     client.subscribe("raspberrypi/ultrasonicRanger")
     client.subscribe("raspberrypi/button")
     #client.subscribe("raspberrypi/led")
