@@ -19,12 +19,12 @@ def on_connect(client, userdata, flags, rc):
 def custom_callback(client, userdata, message):
     print("Custom_callback: " + message.topic + " " + "\"" + str(message.payload, "utf-8") + "\"")
     print("custom_callback: message.payload is of type " + str(type(message.payload)))
-    if str(message.payload) == "LED_ON":
+    if str(message.payload,"utf-8") == "LED_ON":
         digitalWrite(led,1)
-    if str(message.payload) == "LED_OFF":
+    if str(message.payload,"utf-8") == "LED_OFF":
         digitalWrite(led,0)
-    if str(mesage.payload) = "w" or str(mesage.payload) = "a" or str(mesage.payload) = "s" or str(mesage.payload) = "d":
-        setTextnorefresh(str(message.payload))
+    if str(mesage.payload,"utf-8") == "w" or str(mesage.payload,"utf-8") == "a" or str(mesage.payload,"utf-8") == "s" or str(mesage.payload,"utf_8") == "d":
+        setTextnorefresh(str(message.payload,"utf-8"))
 
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
@@ -44,5 +44,6 @@ if __name__ == '__main__':
         client.publish("raspberrypi/ultrasonicRanger",grovepi.ultrasonicRead(ultrasonic_ranger))
         if grovepi.pinMode(button,"INPUT") == 0:
             client.publish("raspberrypi/button","Button pressed!")
+
 
 
