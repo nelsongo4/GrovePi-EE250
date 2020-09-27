@@ -3,7 +3,6 @@ import requests
 # OpenWeatherMap API: https://openweathermap.org/current
 
 # TODO: Sign up for an API key
-OWM_API_KEY = 'd15eeb81a89db14aff4b3f2ef9c9f139'  # OpenWeatherMap API Key
 
 DEFAULT_ZIP = 90089
 
