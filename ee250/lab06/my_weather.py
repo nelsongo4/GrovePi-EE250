@@ -18,12 +18,23 @@ def get_weather(zip_code):
 
     if response.status_code == 200: # Status: OK
         data = response.json()
-        print(data)
+        #print(data)
         # TODO: Extract the temperature & humidity from data, and return as a tuple
         list = [(k, v) for k, v in data.items()]
         list = tuple(list)
-        print(list)
-        return 0.0, 0.0
+        keys_to_extract = ["temp","humidity"]
+        new_dict = list[3][1]
+        print(list[3][1])
+        res = {key: new_dict[key] for key in new_dict.keys()
+                               & {'temp', 'humidity'}}
+        #print(res)
+        return_tuple = (res.get('temp'),res.get('humidity'))
+        print(return_tuple)
+        #a_subset = tuple({key: new_dict[key] for key in keys_to_extract})
+        #This shows its a tuple
+        #print(a_subset)
+        #print(type(a_subset))
+        return return_tuple
 
     else:
         print('error: got response code %d' % response.status_code)
