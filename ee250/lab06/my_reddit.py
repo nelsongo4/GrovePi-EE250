@@ -16,10 +16,10 @@ def qotd_init():
     response = requests.get('http://www.reddit.com/r/quotes/random.json',
                             params=params, headers=headers)
 
-    if response.status_code == 200: # Status: OK
+   if response.status_code == 200: # Status: OK
         data = response.json()
         # TODO: Extract the quote from the data. Use pretty printing to help you decipher the json
-        quote = 'Quote'
+        quote = 'This is supposed to be quote'
         print(type(data))
         #print(data)
         hello = data[0]
@@ -49,10 +49,14 @@ def qotd_init():
         print(json.dumps(deeper_search, sort_keys = True, indent = 4))
         #print(new_search)
         last_search = deeper_search["url"]
+        quote_search = deeper_search["title"]
+        print(quote_search)
         print(last_search)
-        final_search = requests.get(last_search, auth=('user', 'pass'))
-        print(final_search)
-        print(final_search.headers['content-type'])
+        quote = quote_search
+        #final_search = requests.get(last_search, params = params,headers = headers)
+        #final_search = requests.get(last_search)
+        #print(final_search)
+        #print(final_search.headers['content-type'])
         print(quote)
         return quote
 
