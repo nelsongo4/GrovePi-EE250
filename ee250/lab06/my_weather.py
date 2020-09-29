@@ -3,6 +3,7 @@ import requests
 # OpenWeatherMap API: https://openweathermap.org/current
 
 # TODO: Sign up for an API key
+ # OpenWeatherMap API Key
 
 DEFAULT_ZIP = 90089
 
@@ -24,12 +25,12 @@ def get_weather(zip_code):
         list = tuple(list)
         keys_to_extract = ["temp","humidity"]
         new_dict = list[3][1]
-        print(list[3][1])
+        #print(list[3][1])
         res = {key: new_dict[key] for key in new_dict.keys()
                                & {'temp', 'humidity'}}
         #print(res)
         return_tuple = (res.get('temp'),res.get('humidity'))
-        print(return_tuple)
+        #print(return_tuple)
         #a_subset = tuple({key: new_dict[key] for key in keys_to_extract})
         #This shows its a tuple
         #print(a_subset)
@@ -59,3 +60,4 @@ WEATHER_APP = {
 
 if __name__ == '__main__':
     weather_init()
+
