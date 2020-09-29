@@ -1,3 +1,27 @@
+import requests
+import sys
+import time
+
+sys.path.append('/home/pi/Dexter/GrovePi/Software/Python')
+
+import grovepi
+import grove_rgb_lcd as lcd
+
+# Modules for my apps
+import my_reddit
+import my_weather
+#import my_app  # TODO: Create my_app.py using another API, following the examples as a template
+import my_app
+
+PORT_BUZZER = 2     # D2
+PORT_BUTTON = 4     # D4
+POTENTIOMETER = 0   # A0
+LCD_LINE_LEN = 16
+
+# Setup
+grovepi.pinMode(PORT_BUZZER, "OUTPUT")
+grovepi.pinMode(PORT_BUTTON, "INPUT")
+
 lcd.setRGB(0, 128, 0)
 
 # Installed Apps!
@@ -49,10 +73,10 @@ while True:
         lcd.setText_norefresh('\n' + CACHE[app][ind:ind+LCD_LINE_LEN])
         # TODO: Make the output scroll across the screen (should take 1-2 lines of code)
         #print('\n' +  CACHE[app][ind:ind+LCD_LINE_LEN])
-        for l in range(0,len(CACHE[app][ind:ind+LCD_LINE_LEN])):
+        text = CACHE[app][ind:ind+LCD_LINE_LEN]
+        for l in range(0,len(text)):
             lcd.setText_norefresh('\n' + CACHE[app][ind:ind+LCD_LINE_LEN])
             ind = ind + 1
-            #lcd.setText_norefresh(text[l:])
     except KeyboardInterrupt:
         # Gracefully shutdown on Ctrl-C
         lcd.setText('')
@@ -70,3 +94,4 @@ while True:
 
         else:
             raise
+
