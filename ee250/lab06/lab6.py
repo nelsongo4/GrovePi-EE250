@@ -50,8 +50,8 @@ while True:
         # TODO: Make the output scroll across the screen (should take 1-2 lines of code)
         #print('\n' +  CACHE[app][ind:ind+LCD_LINE_LEN])
         for l in range(0,len(CACHE[app][ind:ind+LCD_LINE_LEN])):
-            text = CACHE[app][ind:ind+LCD_LINE_LEN]
-            print(text[l:])
+            lcd.setText_norefresh('\n' + CACHE[app][ind:ind+LCD_LINE_LEN])
+            ind = ind + 1
             #lcd.setText_norefresh(text[l:])
     except KeyboardInterrupt:
         # Gracefully shutdown on Ctrl-C
