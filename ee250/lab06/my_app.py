@@ -23,7 +23,7 @@ def get_text_init():
     print(text)
     return output
 GTLL_APP = {
-    'name': 'Get Text Latitude Longitude',
+    'name': 'Get Text',
     'init': get_text_init
 }
 if __name__ == '__main__':
