@@ -25,22 +25,28 @@ def main(start_time, file):
     period = 1/sample_rate                  #the period of each sample
     duration = sample_count/sample_rate     #length of full audio in seconds
     time = np.arange(0, duration, period)   #generate a array of time values from 0 to [duration] with step of [period]
-
     #TODO: Plot the full sample as a subplot (make sure to include labels)
+
     plt.figure(figsize=(20,10))
     plt.subplot(221)
-
+    plt.ylabel('Amplitude')
+    plt.xlabel('Time')
+    plt.title('Overview')
+    plt.plot(time,samples)
     """***********************SAMPLE SLICE PLOT*************************"""
     print("Analyzing slice at {}s".format(start_time))
     slice_frame_size = int(SLICE_SIZE*sample_rate)   #get the number of elements expected for [SLICE_SIZE] seconds
     start_index = int(start_time*sample_rate)        #get the starting index for the given [start_time]
     end_index = start_index + slice_frame_size      #find the ending index for the slice
-
     time_slice = time[start_index: end_index]       #take a slice from the time array for the given start and end index 
     sample_slice = samples[start_index: end_index]  #take a slice from the samples array for the given start and end index
 
     #TODO: Plot the sample slice as a subplot (make sure to include labels)
     plt.subplot(222)
+    plt.xlabel('Time')
+    plt.ylabel('Amplitude')
+    plt.title('Tone Window')
+    plt.plot(time_slice,sample_slice)
 
     """**********************SAMPLE SLICE FFT PLOT**********************"""
     n = slice_frame_size                            #n is the number of elements in the slice
@@ -55,10 +61,13 @@ def main(start_time, file):
     max_frq_idx = int(MAX_FRQ*slice_duration)       #get the index of the maximum frequency (2000)
     frq = frq[range(max_frq_idx)]                   #truncate the frequency array so it goes from 0 to 2000 Hz
     sample_slice_fft = sample_slice_fft[range(max_frq_idx)]     #truncate the sample slice fft array so it goes from 0 to 2000 Hz
-
     #TODO: Plot the frequency spectrum as a subplot (make sure to include labels)
+    print(sample_slice_fft.real)
     plt.subplot(212)
-
+    plt.xlabel('Frequency')
+    plt.ylabel('Amplitude')
+    plt.title('Tone Window FFT')
+    plt.plot(frq,abs(sample_slice_fft))
     plt.suptitle(file)
     plt.show()
 
@@ -76,3 +85,6 @@ if __name__ == '__main__':
         exit(1)
 
     main(float(sys.argv[2]), sys.argv[1])
+
+
+
