@@ -24,16 +24,43 @@ def get_max_frq(frq, fft):
 
 def get_peak_frqs(frq, fft):
     #TODO: implement an algorithm to find the two maximum values in a given array
+    #fft.sort()
+    #fft.reverse()
+    #fft_Max = fft[0]
+    #fft_secMax = fft[1]
+    #frq.sort()
+    #frq.reverse()
+    #frq_Max = frq[0]
+    #frq_secMax = frq[1]
+    max_frq = 0
+    max_fft = 0 
+    sec_max_fft = 0
+    sec_max_frq = 0
+    for idx in range(len(frq)):
+        if abs(frq[idx]) > max_frq:
+            sec_max_frq = max_frq
+            max_frq = frq[idx]
+        elif abs(frq[idx]) > sec_max_frq:
+            sec_max_frq = frq[idx]
+    for idx1 in range(len(fft)):
+        if abs(fft[idx1]) > max_fft:
+            sec_max_fft = max_fft
+            max_fft = fft[idx1]
+        elif abs(fft[idx1]) > sec_max_fft:
+            sec_max_fft = fft[idx1]
 
     #get the high and low frequency by splitting it in the middle (1000Hz)
-
+    low_frq = sec_max_frq
+    high_frq = max_frq
     #spliting the FFT to high and low frequencies
-
+    low_frq_fft = sec_max_fft
+    high_frq_fft = max_fft
     return (get_max_frq(low_frq, low_frq_fft), get_max_frq(high_frq, high_frq_fft))
 
 def get_number_from_frq(lower_frq, higher_frq):
     #TODO: given a lower frequency and higher frequency pair
     #      return the corresponding key otherwise return '?' if no match is found
+    
     return '?'
 
 def main(file):
@@ -75,11 +102,11 @@ def main(file):
         i += 1
 
         #TODO: grab the sample slice and perform FFT on it
-
+        sample_slice_fft = np.fft.fft(samples[start_index: end_index])/n
         #TODO: truncate the FFT to 0 to 2000 Hz
-
+        sample_slice_fft = sample_slice_fft[range(max_frq_idx)] 
         #TODO: calculate the locations of the upper and lower FFT peak using get_peak_frqs()
-
+        lower_fft,upper_fft = get_peak_frqs(frq,sample_slice_fft)
         #TODO: print the values and find the number that corresponds to the numbers
 
         #Incrementing the start and end window for FFT analysis
@@ -94,3 +121,8 @@ if __name__ == '__main__':
         print("Usage: decode.py [file]")
         exit(1)
     main(sys.argv[1])
+
+
+
+
+
