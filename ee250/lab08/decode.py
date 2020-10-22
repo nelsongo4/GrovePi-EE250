@@ -59,9 +59,35 @@ def get_peak_frqs(frq, fft):
 
 def get_number_from_frq(lower_frq, higher_frq):
     #TODO: given a lower frequency and higher frequency pair
+    if lower_freq == 697 and higher_freq == 1209:
+        value = '1'
+    elif lower_freq == 697 and higher_freq == 1336:
+        value = '2'
+    elif lower_freq == 697 and higher_freq == 1477:
+        value = '3'
+    elif lower_freq == 770 and higher_freq == 1209:
+        value = '4'
+    elif lower_freq == 770 and higher_freq == 1336:
+        value = '5'
+    elif lower_freq == 770 and higher_freq == 1477:
+        value = '6'
+    elif lower_freq == 852 and higher_freq == 1209:
+        value = '7'
+    elif lower_freq == 852 and higher_freq == 1336:
+        value = '8'
+    elif lower_freq == 852 and higher_freq == 1477:
+        value = '9'
+    elif lower_freq == 941 and higher_freq == 1209:
+        value = '*'
+    elif lower_freq == 941 and higher_freq == 1336:
+        value = '0'
+    elif lower_freq == 941 and higher_freq == 1477:
+        value = '#'
+    else:
+        value = '?'
+
     #      return the corresponding key otherwise return '?' if no match is found
-    
-    return '?'
+    return value
 
 def main(file):
     print("Importing {}".format(file))
