@@ -16,7 +16,7 @@ FRQ_THRES = 20
 def get_max_frq(frq, fft):
     max_frq = 0
     max_fft = 0
-    print(fft)
+    #print(fft)
     for idx in range(len(fft)):
         if abs(fft[idx]) > max_fft:
             max_fft = abs(fft[idx])
@@ -41,11 +41,11 @@ def get_peak_frqs(frq, fft):
     high_frq_fft = fft[int(len(fft)/2):]
     low_frq = frq[:int(len(frq)/2)]
     low_frq_fft = fft[:int(len(frq)/2)]
-    print(high_frq)
-    print(" ")
-    print(high_frq_fft)
-    print(" ")
-    print(low_frq)
+    #print(high_frq)
+    #print(" ")
+    #print(high_frq_fft)
+    #print(" ")
+    #print(low_frq)
     #for idx in range(len(frq)):
     #    if abs(frq[idx]) > max_frq:
     #        sec_max_frq = max_frq
@@ -170,7 +170,4 @@ if __name__ == '__main__':
         print("Usage: decode.py [file]")
         exit(1)
     main(sys.argv[1])
-
-
-
 
