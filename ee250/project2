@@ -1,0 +1,85 @@
+mport grovepi
+from grovepi import*
+sys.path.append('../../Software/Python/')
+# This append is to support importing the LCD library.
+sys.path.append('../../Software/Python/grove_rgb_lcd')
+from grove_rgb_lcd import *
+
+
+#HOST = '127.0.0.1'  # The server's hostname or IP address
+#HOST = '172.31.46.164'
+HOST = '18.191.228.22'
+PORT = 5002        # The port used by the server
+sensor = 4
+sound_sensor = 0
+led = 5
+grovepi.pinMode(sound_sensor,"INPUT")
+grovepi.pinMode(led,"OUTPUT")
+threshold_value = 400
+
+#import socket
+#my ec2 ip address
+#HOST = '52.15.134.140' 
+#PORT = 5002
+
+#def my_client():
+#    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+#        s.connect((HOST,PORT))
+#        print('success')
+    # TODO: Get user input and send it to the server using your TCP socket
+        #while True:
+        #   [temp,hum] = grovepi.dht(sensor,0)
+        #    if math.isnan(temp) == False and math.isnan(hum) == False:
+        #        print("temp = %.02f humidity = %.02f "%(temp,hum))
+        #    sensor_value = grovepi.analogRead(sound_sensor)
+
+        #    if sensor_value > threshold_value:
+        #        grovepi.digitalWrite(led,1)
+        #    else:
+        #        grovepi.digitalWrite(led,0)
+
+        #    print("sensor_value = %d" %sensor_value)
+        #print("temp =", temp)
+        #    time.sleep(1)
+#        temp = input("Enter message: ")
+#        s.send(str.encode(temp))
+        # TODO: Receive a response from the server and close the TCP connection
+#        msg = s.recv(1024)
+#        print(msg.decode("utf-8"))
+#        s.close()
+
+def main():
+    
+    # TODO: Create a socket and connect it to the server at the designated IP and port
+    s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    s.connect((HOST,PORT))  
+    print('success')
+    # TODO: Get user input and send it to the server using your TCP socket
+    while True:
+        [temp,hum] = grovepi.dht(sensor,0)
+        if math.isnan(temp) == False and math.isnan(hum) == False:
+            print("temp = %.02f humidity = %.02f "%(temp,hum))
+        sensor_value = grovepi.analogRead(sound_sensor)
+
+        if sensor_value > threshold_value:
+            grovepi.digitalWrite(led,1)
+        else:
+            grovepi.digitalWrite(led,0)
+
+        print("sensor_value = %d" %sensor_value)
+        #print("temp =", temp)
+        time.sleep(1)
+        #sent_msg = input("Enter message: ")
+        temp = str(temp)
+        s.send(str.encode(temp))
+        # TODO: Receive a response from the server and close the TCP connection
+        msg = s.recv(1024)
+        print(msg.decode("utf-8"))
+        #s.close()
+
+if __name__ == '__main__':
+    main()
+#    while 1: 
+#        my_client()
+
+
