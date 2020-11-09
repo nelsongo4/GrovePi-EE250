@@ -1,1 +1,36 @@
+import socket
+import encodings
+import time
+
+#HOST = '172.31.46.164'  # Standard loopback interface address (localhost)
+HOST = '18.191.228.22'
+#HOST = '127.0.0.1'
+PORT = 5002	   # Port to listen on (non-privileged ports are > 1023)
+
+def my_server(): 
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        print("Server Started waiting for client to connect ")
+        s.bind((HOST, PORT))
+        s.listen(5)
+        conn, addr = s.accept()
+        with conn:
+            print('Connected by', addr)
+            while True:
+                data = conn.recv(1024).decode('utf-8')
+                print(data)
+                #print(type(data))
+                print("Ok Sending data to laptop")
+                x_encoded_data = data.encode('utf-8')
+                conn.sendall(x_encoded_data)
+                time.sleep(1)
+                if not data:
+                    break
+                else:
+                    pass
+
+
+if __name__ == '__main__':
+    while 1:
+	my_server()
+
 
